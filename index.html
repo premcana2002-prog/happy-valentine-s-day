@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<link href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Italianno&display=swap" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #B0E0E6;
+            transition: background-color 0.8s ease;
+            font-family: 'Fleur De Leah', cursive;
+            font-size: 1.5rem;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+            margin: 0;
+        }
+        h1 {
+            color: #ff4d4d;
+            font-family: 'Fleur De Leah', cursive;
+            font-size: 4rem;
+            margin-bottom: 20px;
+            z-index: 1;
+        }
+        .gif-container img {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            z-index: 1;
+        }
+        .buttons {
+            display: flex;
+            flex-direction: row;
+            gap: 100px; 
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            z-index: 10;
+            margin-top: 20px;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        #yesBtn {
+            background-color: #28a745;
+            color: white;
+            font-weight: bold;
+            transition: font-size 0.2s ease, padding 0.2s ease;
+        }
+        #noBtn {
+            background-color: #dc3545;
+            color: white;
+            font-weight: bold;
+            position: relative;
+        }
+        #success-screen h1 {
+            font-family: 'Italianno', cursive;
+            font-size: 3rem; /* Très grand pour un bel effet */
+            color: #ff4d4d;
+            font-weight: normal;
+            margin-top: 10px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="question-screen">
+        <div class="gif-container">
+            <img id="mainGif" src="https://media.tenor.com/wkzCX9s5kxQAAAAj/0906-peacegoma.gif" alt="Cute Bear">
+        </div>
+        <h1> 🌹 Will you be my Valentine Jimiki ? 🌹 </h1>
+        <div class="buttons">
+            <button id="yesBtn" onclick="acceptLove()"> Yes 🩵 </button>
+            <button id="noBtn" onmouseover="handleNoInteraction()" onclick="handleNoInteraction()"> No 😭</button>
+        </div>
+    </div>
+
+    <div id="success-screen" class="hidden">
+        <div class="gif-container">
+            <img src="https://i.pinimg.com/originals/3e/1f/f4/3e1ff44c90e52ff1defe6b5dbaf225ca.gif" alt="Happy Bears">
+            <img src="https://media.tenor.com/ejMtbLv7H-gAAAAj/panda-bear-brown-bear.gif" alt="Happy Bears">
+            <img src="https://media.tenor.com/gOVl3OCca-oAAAAi/bubu-angry-bubu-and-dudu.gif" alt="Happy Bears">
+            <img src="https://media.tenor.com/SsZwrv6-ev8AAAAi/tkthao219-bubududu.gif" alt="Happy Bears">
+        <h1> 🩵 I knew you'd say yes! My Heart is Yours Forever Jimiki 🩵</h1>
+        <h1> 🩵 Happy Valentine's day  Jimiki 🩵</h1>
+        <div class="gif-container">
+            <img src="https://media.tenor.com/66g8yEi-i0oAAAAi/mimibubu.gif" alt="Happy Bears">
+            <img src="https://media.tenor.com/m_I74RxqMdcAAAAj/tkthao219-bubududu.gif" alt="Happy Bears">
+            <img src="https://media.tenor.com/0XYG8fpqZkQAAAAi/tkthao219-bubududu.gif" alt="Happy Bears">
+            <img src="https://media.tenor.com/fFVG1J-P7N8AAAAi/milk-and-mocha-sweet.gif" alt="Happy Bears">
+        </div>
+
+    <script>
+        const phrases = [
+            "Are you sure ?🤨",
+            "Think again 🙁",
+            "Really 😫",
+            "I'll be so sad...🥲",
+            "Please don't do this...🥹",
+            "Give me a chance !🥺",
+            "I'm gonna Cry...😭",
+            "Jimiki no please ?😭 ",
+            "Stop clicking No !😭",
+            "Just say Yes !😭"
+        ];
+
+        const gifs = [
+        "https://media.tenor.com/MYGG8hAeE04AAAAj/angry-bubu.gif",
+        "https://media.tenor.com/QOzMqPvW8PUAAAAi/love-you.gif",
+        "https://media1.tenor.com/m/Ogztv6cVKwwAAAAd/bubu-dudu.gif",
+        "https://media.tenor.com/dnlemy1CA9EAAAAi/bubu-dudu-sseeyall.gif",
+        "https://media.tenor.com/sWXhCC4A2woAAAAi/bubu-bubu-dudu.gif",
+        "https://i.pinimg.com/736x/ed/c5/82/edc582d2514eb13fb00a3fbcd7b51b99.jpg",
+        "https://media.tenor.com/cyBBNBUvDK4AAAAj/bubu-dudu-sseeyall.gif",
+        "https://i.pinimg.com/originals/b8/72/e3/b872e330c4c2bac00cc739a79e59546e.gif",
+        "https://media.tenor.com/uzTknCqPVBgAAAAi/tooji-bubududu.gif",
+        "https://i.pinimg.com/736x/60/d9/fd/60d9fd2a30dd48b5903a0ab465b65af3.jpg"
+    ];
+
+    let clickCount = 0;
+
+    function handleNoInteraction() {
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const mainGif = document.getElementById('mainGif');
+
+        // 1. Mise à jour texte et GIF
+        if (clickCount < phrases.length) {
+            noBtn.innerText = phrases[clickCount];
+            mainGif.src = gifs[clickCount];
+        } else {
+            noBtn.innerText = "Just say Yes !😭";
+            mainGif.src = gifs[gifs.length - 1];
+        }
+        clickCount++;
+
+        // 2. Déplacement sécurisé (évite de sortir de l'écran)
+        const padding = 20; // Marge de sécurité
+        const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+        const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+
+        const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
+        const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
+
+        noBtn.style.position = 'fixed'; // 'fixed' est plus stable sur mobile
+        noBtn.style.left = randomX + 'px';
+        noBtn.style.top = randomY + 'px';
+
+        // 3. Grossissement du bouton Oui (limité pour ne pas cacher tout l'écran)
+        const currentFontSize = window.getComputedStyle(yesBtn).fontSize;
+        const newSize = parseFloat(currentFontSize) * 1.3;
+        if (newSize < 150) { // On met une limite max pour mobile
+            yesBtn.style.fontSize = newSize + 'px';
+            yesBtn.style.padding = (parseFloat(window.getComputedStyle(yesBtn).padding) * 1.1) + 'px';
+        }
+    }
+
+    // Ajout d'un écouteur pour le tactile mobile
+    document.getElementById('noBtn').addEventListener('touchstart', function(e) {
+        e.preventDefault(); // Empêche le clic par défaut
+        handleNoInteraction();
+    });
+
+    function acceptLove() {
+        document.getElementById('question-screen').classList.add('hidden');
+        document.getElementById('success-screen').classList.remove('hidden');
+        document.body.style.backgroundColor = "#B0E0E6";
+        document.body.style.overflow = "auto"; // Permet de scroller si bcp de gifs
+    }
+</script>
