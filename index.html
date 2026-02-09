@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <link href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah&display=swap" rel="stylesheet">
@@ -29,13 +30,20 @@
             margin-bottom: 20px;
             z-index: 1;
         }
+        .gif-container {
+            display: flex;
+            flex-wrap: wrap; /* Permet aux images de passer à la ligne si pas de place */
+            justify-content: center;
+            gap: 10px;
+            z-index: 1;
+        }
+
         .gif-container img {
-            width: 200px;
-            height: 200px;
+            width: 45%; /* Affiche 2 images par ligne sur mobile */
+            max-width: 150px; /* Empêche qu'elles soient trop grandes */
+            height: auto;
             object-fit: contain;
             border-radius: 10px;
-            margin-bottom: 20px;
-            z-index: 1;
         }
         .buttons {
             display: flex;
@@ -98,14 +106,18 @@
             <img src="https://media.tenor.com/ejMtbLv7H-gAAAAj/panda-bear-brown-bear.gif" alt="Happy Bears">
             <img src="https://media.tenor.com/gOVl3OCca-oAAAAi/bubu-angry-bubu-and-dudu.gif" alt="Happy Bears">
             <img src="https://media.tenor.com/SsZwrv6-ev8AAAAi/tkthao219-bubududu.gif" alt="Happy Bears">
+        </div>
+        
         <h1> 🩵 I knew you'd say yes! My Heart is Yours Forever Jimiki 🩵</h1>
-        <h1> 🩵 Happy Valentine's day  Jimiki 🩵</h1>
+        <h1> 🩵 Happy Valentine's day Jimiki 🩵</h1>
+        
         <div class="gif-container">
             <img src="https://media.tenor.com/66g8yEi-i0oAAAAi/mimibubu.gif" alt="Happy Bears">
             <img src="https://media.tenor.com/m_I74RxqMdcAAAAj/tkthao219-bubududu.gif" alt="Happy Bears">
             <img src="https://media.tenor.com/0XYG8fpqZkQAAAAi/tkthao219-bubududu.gif" alt="Happy Bears">
             <img src="https://media.tenor.com/fFVG1J-P7N8AAAAi/milk-and-mocha-sweet.gif" alt="Happy Bears">
         </div>
+    </div> ```
 
     <script>
         const phrases = [
@@ -185,3 +197,4 @@
         document.body.style.overflow = "auto"; // Permet de scroller si bcp de gifs
     }
 </script>
+
